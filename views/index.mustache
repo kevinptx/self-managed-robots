@@ -7,22 +7,24 @@
   </head>
   <body>
 
-    <h1>{{title}}</h1>
 
     <div class="people">
-
       {{#robots}}
       <div class="person">
-        <h5>{{name}}</h5>
-        <div class="images">
-          <a href="/users/{{id}}"> <img src="{{avatar}}" alt=""></a>
+        <a href="/users/{{id}}"><img class="images" src="{{avatar}}" alt=""></a>
+        <a href="/users/{{id}}"><h2>{{name}}</h2></a>
+        <div class="job-status">
+          {{#job}}{{.}}, {{/job}}
+          {{^job}}Available for hire{{/job}}
+          {{company}}
         </div>
-        <div class="skills">
-          <p>{{skills}}</p>
         </div>
+        {{/robots}}
       </div>
-      {{/robots}}
 
+      <!-- <div class="skills">
+      <p>{{skills}}</p>
+    </div> -->
     </div>
   </body>
 </html>

@@ -12,7 +12,18 @@ app.get ("/", function(request, response){
   })
 })
 
-
+app.get('/users/:id', function(request, response){
+  const idWeWant = parseInt(request.params.id)
+  let robot = false;
+  for (var i = 0; i < data.users.length; i++) {
+    if(data.users[i].id ===idWeWant){
+      robot = data.users[i]
+    }
+  }
+  response.render("robot", {
+    robot: robot
+  })
+})
 
 app.listen(3000, function(){
   console.log("Express started on port 3000")

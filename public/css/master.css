@@ -1,15 +1,45 @@
 .people {
-  border: 6px dotted red;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+
 .person {
-  border: 6px dotted yellow;
+  margin: 15px;
+  display: flex;
+  flex-basis: 20%;
+  flex-direction: column;
+  height: 20em;
+  padding: 5px;
+  border: 1px solid #afafaf;
+}
+
+a {
+  /*width: 250px;
+  height: 200px;*/
+  display: flex;
+  justify-content: center;
 }
 
 .images {
-  border: 6px dotted black;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-basis: 30%;
+  flex-shrink: 0;
+   min-width: 100%;
+   min-height: 100%
 }
 
 .skills {
-  border: 6px dotted blue
+}
+
+h2{
+  color: blue;
+  padding: 5px 5px 5px 5px;
+}
+
+.job-status{
+  font-size: 1.2em;
+  padding: 5px 5px 15px 15px;
 }
