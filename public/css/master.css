@@ -1,0 +1,15 @@
+.people {
+  border: 6px dotted red;
+}
+
+.person {
+  border: 6px dotted yellow;
+}
+
+.images {
+  border: 6px dotted black;
+}
+
+.skills {
+  border: 6px dotted blue
+}
