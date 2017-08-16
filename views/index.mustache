@@ -14,7 +14,7 @@
         <a href="/users/{{id}}"><h2>{{name}}</h2></a>
         <div class="job-status">
           {{#job}}{{.}}, {{/job}}
-          {{^job}}Available for hire{{/job}}
+          {{^job}}<h3 class="available">Available for hire</h3>{{/job}}
           {{company}}
         </div>
         </div>
