@@ -3,9 +3,39 @@
   <link rel="stylesheet" href="/css/master.css">
 </head>
 <body>
-  <h1>{{robot.name}}</h1>
+  <h1></h1>
+  <div class="robotDiv">
+    <div class="robotAvatar">
+      <img class="avatars" src="{{robot.avatar}}" alt="">
+    </div>
+    <div class="robotInfo">
+      <h1 class="name">{{robot.name}}</h1>
+      <h4 class="address">{{robot.address.city}}, {{robot.address.country}} | {{robot.job}},
+      {{robot.company}}</h4>
+      <h4 class="contact">{{robot.email}} | {{robot.phone}}</h4>
 
-  <img src="{{robot.avatar}}" alt="">
+
+      <div class="education">
+        <div class="table-header">
+          <h4 id="educationHeader">Education</h4>
+        </div>
+           <div class="university">
+             <h4 id="university">{{robot.university}}</h4>
+           </div>
+         </div>
+
+         <div class="skills">
+           <div class="table-header">
+             <h4 id="skillsHeader">Skills</h4>
+           </div>
+            <div class="skillList">
+              {{#robot.skills}}
+              <h4 id="skillsList">{{.}}</h4>
+              {{/robot.skills}}
+            </div>
+          </div>
+    </div>
+  </div>
 
 </body>
 </html>
