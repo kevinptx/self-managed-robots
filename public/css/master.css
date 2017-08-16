@@ -15,8 +15,6 @@
 }
 
 a {
-  /*width: 250px;
-  height: 200px;*/
   display: flex;
   justify-content: center;
 }
@@ -34,12 +32,13 @@ a {
 .skills {
 }
 
-h2{
+h2 {
   color: blue;
   padding: 5px 5px 5px 5px;
+  text-align: left;
 }
 
 .job-status{
   font-size: 1.2em;
-  padding: 5px 5px 15px 15px;
+  padding: 5px 5px 5px 15px;
 }
