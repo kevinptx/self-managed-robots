@@ -14,26 +14,28 @@
       {{robot.company}}</h4>
       <h4 class="contact">{{robot.email}} | {{robot.phone}}</h4>
 
+<div class="educationSkills">
+  <div class="education">
+    <div class="table-header">
+      <h4 id="educationHeader">Education</h4>
+    </div>
+    <div class="university">
+      <p id="university">{{robot.university}}</p>
+    </div>
+  </div>
 
-      <div class="education">
-        <div class="table-header">
-          <h4 id="educationHeader">Education</h4>
-        </div>
-           <div class="university">
-             <h4 id="university">{{robot.university}}</h4>
-           </div>
-         </div>
+  <div class="skills">
+    <div class="table-header">
+      <h4 id="skillsHeader">Skills</h4>
+    </div>
+    <div class="skillList">
+      {{#robot.skills}}
+      <p id="skillsList">{{.}}</p>
+      {{/robot.skills}}
+    </div>
+  </div>
 
-         <div class="skills">
-           <div class="table-header">
-             <h4 id="skillsHeader">Skills</h4>
-           </div>
-            <div class="skillList">
-              {{#robot.skills}}
-              <h4 id="skillsList">{{.}}</h4>
-              {{/robot.skills}}
-            </div>
-          </div>
+</div>
     </div>
   </div>
 
