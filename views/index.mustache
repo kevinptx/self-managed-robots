@@ -8,17 +8,17 @@
   <body>
 
     <div class="people">
-      {{#robots}}
+      {{#users}}
       <div class="person">
-        <a href="/users/{{id}}"><img class="images" src="{{avatar}}" alt=""></a>
-        <a href="/users/{{id}}"><h2>{{name}}</h2></a>
+        <a href="/users/{{_id}}"><img class="images" src="{{avatar}}" alt=""></a>
+        <a href="/users/{{_id}}"><h2>{{name}}</h2></a>
         <div class="job-status">
           {{#job}}{{.}}, {{/job}}
           {{^job}}<h3 class="available">Available for hire</h3>{{/job}}
           {{company}}
         </div>
         </div>
-        {{/robots}}
+        {{/users}}
       </div>
 
   </body>

@@ -1,29 +1,35 @@
 const express = require("express")
 const app = express()
 const mustache = require("mustache-express")
-const data = require("./data")
+const data = require("./data/data")
+const MongoClient = require("mongodb")
+
 app.engine('mustache', mustache())
 app.set('view engine', 'mustache')
 app.use( express.static('public'))
 
-app.get ("/", function(request, response){
-  response.render ('index', {
-    robots: data.users
-  })
-})
+const url = "mongodb://127.0.0.1:27017/user-directory-daily-mongo"
 
-app.get('/users/:id', function(request, response){
-  const idWeWant = parseInt(request.params.id)
-  let robot = false;
-  for (var i = 0; i < data.users.length; i++) {
-    if(data.users[i].id === idWeWant){
-      robot = data.users[i]
-    }
-  }
-  response.render("robot", {
-    robot: robot
-  })
-})
+// MongoClient.connect(url, function(err, db) {
+//   if (err) {
+//     throw err;
+//   } else {
+//     console.log('Successfully connected to the database');
+//   }
+//   for (var i = 0; i < data.users.length; i++) {
+//     const user = data.users[i];
+//     db.collection("users").updateOne(
+//       {id: user.id},
+//       user,
+//       {upsert: true}
+//     )
+//   }
+// })
+
+
+const userRoutes = require("./routes/users")
+
+app.use(userRoutes)
 
 app.listen(3000, function(){
   console.log("Express started on port 3000")
