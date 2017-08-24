@@ -30,6 +30,10 @@ router.get('/users/:id', function(request, response){
   })
 })
 
+router.get("/register", function(req, res) {
+  res.render("register")
+})
+
 // router.get('/users/:id', function(request, response){
 //   const idWeWant = parseInt(request.params.id)
 //   let robot = false;
