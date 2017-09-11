@@ -1,50 +1,120 @@
 
 const express = require("express")
 const router = express.Router()
-// const data = require("../data/data")
-const MongoClient = require("mongodb")
+const mongoose = require("mongoose")
+mongoose.Promise = require("bluebird")
+const users = require("../models/Robots")
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/user-directory-daily-mongo"
+const requireAuth = function(req, res, next){
+  console.log(req.session.user)
+  if(req.session.user){
+    next()
+  }else{
+    res.redirect("/signin")
+  }
+}
 
-
-router.get ("/", function(request, response){
-  MongoClient.connect(MONGO_URL, function(err, db) {
-      db.collection("users").find().toArray().then(function(users) {
-        response.render("index", {
-          users: users
-        })
-      })
+router.get ("/", requireAuth, function(req, res){
+  console.log("Connected");
+  const title = "Robot Job Database"
+  users.find()
+  .then(function(users){
+    res.render("index", {
+      title: title,
+      users: users
     })
   })
+})
 
 
-router.get('/users/:id', function(request, response){
-  MongoClient.connect(MONGO_URL, function(err, db){
-    db.collection("users").findOne({
-      _id: MongoClient.ObjectID(request.params.id)
-    }).then(function(robot){
-      response.render("robot", {
-        robot: robot
+router.get("/NewRobot", function(req, res) {
+  res.render("NewRobot")
+})
+
+router.post("/newRobot", function(req, res) {
+  const name = req.body.name
+  const avatar = req.body.avatar
+  const email = req.body.email
+  const phone = req.body.phone
+  const university = req.body.university
+  const company = req.body.company
+  const job = req.body.job
+  const skills = req.body.skills
+  const user = new users()
+  user.name = name
+  user.avatar = avatar
+  user.email = email
+  user.phone = phone
+  user.university = university
+  user.company = company
+  user.job = job
+  user.skills = skills
+  user.save().then(function(user) {
+    res.redirect("/")
+  })
+  .catch(function(error) {
+    console.log("error", error)
+    res.render("newRobot", {
+      user: user,
+      errors: error.errors
+    })
+    console.log(error);
+  })
+})
+
+router.post("/users/:id", requireAuth, function(req, res){
+  users.findOne({ _id: req.params.id }).then(function(user){
+    const name = req.body.name
+    const avatar = req.body.avatar
+    const email = req.body.email
+    const phone = req.body.phone
+    const university = req.body.university
+    const company = req.body.company
+    const job = req.body.job
+    const skills = req.body.skills
+    user.name = name
+    user.avatar = avatar
+    user.email = email
+    user.phone = phone
+    user.university = university
+    user.company = company
+    user.job = job
+    user.skills = skills
+    user.save().then(function(user) {
+      res.redirect("/")
+    })
+    .catch(function(error){
+      res.render("edit", {
+        user: user,
+        error: error.errors
       })
     })
   })
 })
 
-router.get("/register", function(req, res) {
-  res.render("register")
+router.get("/users/:id", requireAuth, function (req, res){
+  users.findOne({_id: req.params.id})
+  .then(function(user){
+    res.render("profile", {
+      user: user
+    })
+  })
 })
 
-// router.get('/users/:id', function(request, response){
-//   const idWeWant = parseInt(request.params.id)
-//   let robot = false;
-//   for (var i = 0; i < data.users.length; i++) {
-//     if(data.users[i].id === idWeWant){
-//       robot = data.users[i]
-//     }
-//   }
-//   response.render("robot", {
-//     robot: robot
-//   })
-// })
+router.get("/users/:id/edit", requireAuth, function(req, res){
+  users.findOne({_id: req.params.id})
+  .then(function(user){
+    res.render("edit", {
+      user:user
+    })
+  })
+})
+
+router.get("/users/:id/delete", requireAuth, function(req, res){
+  users.deleteOne({_id: req.params.id})
+  .then(function(user){
+    res.redirect("/")
+  })
+})
 
 module.exports = router

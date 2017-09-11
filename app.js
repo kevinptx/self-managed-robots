@@ -1,48 +1,40 @@
 const express = require("express")
 const app = express()
-const session = require("express-session")
 const mustache = require("mustache-express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 mongoose.Promise = require("bluebird")
-const data = require("./data/data")
 const MongoClient = require("mongodb")
+const session = require("express-session")
+const mongooseSession = require("mongoose-session")
 
 app.engine('mustache', mustache())
-app.set('views', './views')
 app.set('view engine', 'mustache')
 app.use( express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 
+const url = "mongodb://127.0.0.1:27017/robots"
+mongoose.connect(url)
+
 var sess = {
-  secret: "keyword cat",
+  secret: "keyboard cat",
   cookie: {},
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  store: mongooseSession(mongoose)
 }
+app.use(session(sess))
 
-const url = "mongodb://127.0.0.1:27017/robots"
 
-// MongoClient.connect(url, function(err, db) {
-//   if (err) {
-//     throw err;
-//   } else {
-//     console.log('Successfully connected to the database');
-//   }
-//   for (var i = 0; i < data.users.length; i++) {
-//     const user = data.users[i];
-//     db.collection("users").updateOne(
-//       {id: user.id},
-//       user,
-//       {upsert: true}
-//     )
-//   }
-// })
+const users = require("./routes/users")
+app.use(users)
 
-const userRoutes = require("./routes/users")
+const welcome = require("./routes/welcome")
+app.use(welcome)
 
-app.use(userRoutes)
+const registrationRoutes = require("./routes/register")
+app.use(registrationRoutes)
 
 app.listen(3000, function(){
-  console.log("Express started on port 3000")
+  console.log("Express is LIVE")
 })

@@ -1,0 +1,48 @@
+<html>
+<head>
+  <meta name="charset"="utf-8">
+  <link rel="stylesheet" href="/css/master.css">
+  <title>Add New Robot Page</title>
+</head>
+<body>
+
+  <h1="newRobotHeader">Please Create New Robot Entry Below:</h1>
+  <div class="main">
+    <h1>{{errorMessage}}</h1>
+    <form class="" action="/newRobot" method="post">
+      <div class="">
+        <label for="">Name</label>
+        <input type="text" name="name" value="">
+      </div>
+
+      <div class="">
+        <label for="">Avatar URL</label>
+        <input type="url" name="avatar" value="">
+      </div>
+      <div class="">
+        <label for="">Email</label>
+        <input type="email" name="email" value="">
+      </div>
+      <div class="">
+        <label for="">Phone Number</label>
+        <input type="text" name="phone" value="">
+      </div>
+      <div class="">
+        <label for="">Company</label>
+        <input type="text" name="company" value="">
+      </div>
+      <div class="">
+        <label for="">Job</label>
+        <input type="text" name="job" value="">
+      </div>
+      <div class="">
+        <label for="">Skills</label>
+        <input type="text" name="skills" value="">
+      </div>
+      <div class="">
+        <input id="submitButton" type="submit" name="" value="Create a New Robot">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
