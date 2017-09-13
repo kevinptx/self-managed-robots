@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const NewUser = require("../models/User.js")
+const NewUser = require("../models/User")
 const bcrypt = require("bcryptjs")
 const mongoose = require("mongoose")
 mongoose.Promise = require("bluebird")

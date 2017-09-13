@@ -9,7 +9,7 @@ const requireAuth = function(req, res, next){
   console.log(req.session.user)
   if(req.session.user){
     next()
-  }else{
+  } else {
     res.redirect("/signin")
   }
 }
@@ -19,6 +19,7 @@ router.get ("/", requireAuth, function(req, res){
   const title = "Robot Job Database"
   users.find()
   .then(function(users){
+    console.log(users)
     res.render("index", {
       title: title,
       users: users
@@ -31,7 +32,7 @@ router.get("/NewRobot", function(req, res) {
   res.render("NewRobot")
 })
 
-router.post("/newRobot", function(req, res) {
+router.post("/NewRobot", function(req, res) {
   const name = req.body.name
   const avatar = req.body.avatar
   const email = req.body.email
@@ -62,8 +63,8 @@ router.post("/newRobot", function(req, res) {
   })
 })
 
-router.post("/users/:id", requireAuth, function(req, res){
-  users.findOne({ _id: req.params.id }).then(function(user){
+router.post("/users/:id", requireAuth, function(req, res) {
+  users.findOne({ _id: req.params.id }).then(function(user) {
     const name = req.body.name
     const avatar = req.body.avatar
     const email = req.body.email
@@ -92,7 +93,7 @@ router.post("/users/:id", requireAuth, function(req, res){
   })
 })
 
-router.get("/users/:id", requireAuth, function (req, res){
+router.get("/users/:id", requireAuth, function (req, res) {
   users.findOne({_id: req.params.id})
   .then(function(user){
     res.render("profile", {
@@ -101,7 +102,7 @@ router.get("/users/:id", requireAuth, function (req, res){
   })
 })
 
-router.get("/users/:id/edit", requireAuth, function(req, res){
+router.get("/users/:id/edit", requireAuth, function(req, res) {
   users.findOne({_id: req.params.id})
   .then(function(user){
     res.render("edit", {
@@ -110,7 +111,7 @@ router.get("/users/:id/edit", requireAuth, function(req, res){
   })
 })
 
-router.get("/users/:id/delete", requireAuth, function(req, res){
+router.get("/users/:id/delete", requireAuth, function(req, res) {
   users.deleteOne({_id: req.params.id})
   .then(function(user){
     res.redirect("/")

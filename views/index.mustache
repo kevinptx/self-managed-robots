@@ -3,26 +3,26 @@
   <head>
     <link rel="stylesheet" href="/css/master.css">
     <meta charset="utf-8">
-    <title>Robots</title>
-    <div class="newUser">
-      <a href="/register">Register</a>
-    </div>
-
+    <title>Robot Database</title>
   </head>
   <body>
+    <h1>{{title}}</h1>
+    <div class="newUser">
+      <a id="newRobotLink" href="/newRobot">Add New Robot to the Directory</a>
+    </div>
 
-    <div class="people">
-      {{#users}}
-      <div class="person">
-        <a href="/users/{{_id}}"><img class="images" src="{{avatar}}" alt=""></a>
-        <a href="/users/{{_id}}"><h2>{{name}}</h2></a>
-        <div class="job-status">
-          {{#job}}{{.}}, {{/job}}
-          {{^job}}<h3 class="available">Available for hire</h3>{{/job}}
-          {{company}}
-        </div>
-        </div>
+    <div class="LargestDiv">
+        {{#users}}
+          <div class="results">
+            <a href="/users/{{_id}}"><img class="avatars" src="{{avatar}}"></a>
+            <a href="/users/{{_id}}"><h2 class="name">{{name}}</h2></a>
+            <h4 class="jobInfo">
+              {{#job}}{{.}}, {{/job}}
+              {{^job}}<h4 class ="unemployed">Available for Hire</h3>{{/job}}
+              {{company}}
+            </h4>
+          </div>
         {{/users}}
-      </div>
+    </div>
   </body>
 </html>
